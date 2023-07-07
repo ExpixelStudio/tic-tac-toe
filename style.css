@@ -1,0 +1,20 @@
+#game-board{
+    display:grid;
+    grid-template-columns: repeat(3 , 40px);
+    grid-template-rows: repeat(3 , 40px);
+    
+}
+
+.play-square{
+    display: flex;
+    /* border: 1px solid black; */
+    justify-content:center;
+    align-items: center;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    /* text-align: center; */
+}
+
+.play-square:hover{
+    border: 2px solid black;
+}

@@ -1,20 +1,16 @@
 "use strict";
 
-const gameBoard = () => {
+const gameBoard = (() => {
+
     const board = document.getElementById('game-board');
-    const boardObject = ['X','O','X','O','X','O','X','O','X'];
+    /* const boardObject = ['X','O','X','O','X','O','X','O','X']; */
     
 
     const createBoard = () => {
-            for (let i = 0 ; i < 9 ; i++) {
+        for (let i = 0 ; i < 9 ; i++) {
             const playBox = document.createElement('div');
-
             playBox.classList.add('play-square');
             board.appendChild(playBox);
-
-            
-            
-            
         }
     }
 
@@ -22,24 +18,47 @@ const gameBoard = () => {
         createBoard();
         const render = document.querySelectorAll('.play-square');
             render.forEach((object,index) => {
-                object.innerHTML = boardObject[index];
+                /* object.innerHTML = boardObject[index]; */
             })
+    }
+        
 
-            return render;
+    /* const print = () => console.log(display()); */
+        return {
+            display,
+            /* boardObject, */
+        };
+
+})(); //gameBoard module
+
+const gameController = () => {
+
+    const playerTurn = () => {
+        const space = document.querySelectorAll('.play-square');
+            
+            space.forEach((square) => {
+                
+                square.addEventListener('click',function(e) {
+                    console.log("ff");
+                    square.innerHTML = 'X';
+                })
+
+            })
     }
 
-    const print = () => console.log(display());
-    return display;
-    
+    return {playerTurn};
 }
 
-const players = () => {
 
-}
+const gameFlow = gameController();
 
-const show = gameBoard();
+gameBoard.display();
+gameFlow.playerTurn();
+/* console.log(gameBoard.boardObject); */
 
-show();
+/* const show = gameBoard();
+
+show(); */
 
 /* const personFactory = (name, age) => {
     const sayHello = () => console.log('hello!');
