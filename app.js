@@ -34,17 +34,31 @@ const gameBoard = (() => {
 const gameController = () => {
 
     const playerTurn = () => {
+
+        const boardObject = ['X','O','X','O','X','O','X','O','X'];
+
+        const turnMsg = document.querySelector('.player-turn');
         const space = document.querySelectorAll('.play-square');
-            
+        const currentPlayer = 'X';    
+        let i = -1;
             space.forEach((square) => {
                 
-                square.addEventListener('click',function(e) {
-                    console.log("ff");
-                    square.innerHTML = 'X';
+               
+                square.addEventListener('click' , function(e){
+                    /* for (let i = 0; i < boardObject.length-1 ; i++) { */
+                    if(square.innerHTML == '') {
+                        i++;
+                        console.log(i);
+                        turnMsg.innerHTML = `Its ${boardObject[i]}'s turn.`;
+                        square.innerHTML = boardObject[i];
+                    } 
+                        return;
                 })
 
             })
     }
+
+
 
     return {playerTurn};
 }
