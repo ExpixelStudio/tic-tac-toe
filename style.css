@@ -2,7 +2,10 @@
     display:grid;
     grid-template-columns: repeat(3 , 40px);
     grid-template-rows: repeat(3 , 40px);
-    
+}
+
+.boxEl-6{
+    background-color: green;
 }
 
 .play-square{
@@ -18,3 +21,4 @@
 .play-square:hover{
     border: 2px solid black;
 }
+

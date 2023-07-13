@@ -10,6 +10,7 @@ const gameBoard = (() => {
         for (let i = 0 ; i < 9 ; i++) {
             const playBox = document.createElement('div');
             playBox.classList.add('play-square');
+            playBox.classList.add(`boxEl-${[i+1]}`); //TODO make win condtions in gameController function using these classes
             board.appendChild(playBox);
         }
     }
@@ -45,10 +46,12 @@ const gameController = () => {
                 
                
                 square.addEventListener('click' , function(e){
+
+                    console.log(square.item);
                     /* for (let i = 0; i < boardObject.length-1 ; i++) { */
                     if(square.innerHTML == '') {
                         i++;
-                        console.log(i);
+                        /* console.log(i); */
                         turnMsg.innerHTML = `Its ${boardObject[i]}'s turn.`;
                         square.innerHTML = boardObject[i];
                     } 
