@@ -10,7 +10,7 @@ const gameBoard = (() => {
         for (let i = 0 ; i < 9 ; i++) {
             const playBox = document.createElement('div');
             playBox.classList.add('play-square');
-            playBox.classList.add(`boxEl-${[i+1]}`); //TODO make win condtions in gameController function using these classes
+            playBox.classList.add(`squareEl-${[i+1]}`); //TODO make win condtions in gameController function using these classes
             board.appendChild(playBox);
         }
     }
@@ -34,43 +34,123 @@ const gameBoard = (() => {
 
 const gameController = () => {
 
+        /* const boardObject = ['X','O','X','O','X','O','X','O','X']; */
+    
+
     const playerTurn = () => {
 
         const boardObject = ['X','O','X','O','X','O','X','O','X'];
-
         const turnMsg = document.querySelector('.player-turn');
-        const space = document.querySelectorAll('.play-square');
-        const currentPlayer = 'X';    
+        const playSpace = document.querySelectorAll('.play-square');
+        const parent = document.getElementById('game-board');
         let i = -1;
-            space.forEach((square) => {
+        /* console.log([parent].indexOf()); */
+        /* console.log(parent.childNodes); */
+            playSpace.forEach((square) => {
                 
-               
+                console.log('hmmss');
+                
                 square.addEventListener('click' , function(e){
-
-                    console.log(square.item);
+                    checkWin();
+                    console.log('clicked play space');
+                    console.log('Index:'+ Array.from(parent.children).indexOf(square),square);
+                    /* if(square.children) */
                     /* for (let i = 0; i < boardObject.length-1 ; i++) { */
                     if(square.innerHTML == '') {
                         i++;
                         /* console.log(i); */
-                        turnMsg.innerHTML = `Its ${boardObject[i]}'s turn.`;
+                        turnMsg.innerHTML = `Its ${boardObject[i+1]}'s turn.`;
                         square.innerHTML = boardObject[i];
+                        checkWin();
                     } 
                         return;
-                })
+                });
 
-            })
-    }
+            });
+    };
+    
+    /* const checkWin = () => {
+        const parent = document.getElementById('game-board');
 
+        const winConditions = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+          ];
 
+          for (const winCombo of winConditions) {
+                if (winCombo.every(index => boardObject[index] === 'X')){
+                    console.log('X wins');
+                    return true;
+                }
+          }
 
-    return {playerTurn};
+            return false;
+        };
+        
+      
+        }
+*/
+        return {
+            playerTurn,
+            checkWin,
+    };
 }
+
+function checkWin(){
+    const boardObject = ['X','O','X','O','X','O','X','O','X'];
+    const parent = document.getElementById('game-board');
+    const playSpace = document.querySelectorAll('.play-square');
+    const winConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+      ];
+
+      playSpace.forEach((square) => {
+         const squareIndex = Array.from(parent.children).indexOf(square);
+            
+         for (const winCombo of winConditions) {
+
+            const [a,b,c] = winCombo;
+            if (parent.children[a].innerHTML =='X' && parent.children[b].innerHTML == 'X' && parent.children[c].innerHTML == 'X'){
+                console.log('X wins!');
+                return true;
+            }
+      }
+
+        return false;
+    });
+      };
+
+      
+    /* if(parent.children[0].innerHTML =='X' && parent.children[1].innerHTML == 'X' && parent.children[2].innerHTML == 'X') {
+        alert('X Wins');
+        console.log('X Win');
+    } */
+
+
+
 
 
 const gameFlow = gameController();
 
 gameBoard.display();
+
 gameFlow.playerTurn();
+
+
+
 /* console.log(gameBoard.boardObject); */
 
 /* const show = gameBoard();
