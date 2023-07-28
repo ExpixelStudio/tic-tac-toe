@@ -102,10 +102,10 @@ const gameController = () => {
     };
 }
 
-function checkWin(){
-    const boardObject = ['X','O','X','O','X','O','X','O','X'];
+const checkWin = () => {
+    //const boardObject = ['X','O','X','O','X','O','X','O','X'];
     const parent = document.getElementById('game-board');
-    const playSpace = document.querySelectorAll('.play-square');
+    //const playSpace = document.querySelectorAll('.play-square');
     const winConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -117,8 +117,7 @@ function checkWin(){
         [2, 4, 6],
       ];
 
-      playSpace.forEach((square) => {
-         const squareIndex = Array.from(parent.children).indexOf(square);
+      
             
          for (const winCombo of winConditions) {
 
@@ -126,13 +125,18 @@ function checkWin(){
             if (parent.children[a].innerHTML =='X' && parent.children[b].innerHTML == 'X' && parent.children[c].innerHTML == 'X'){
                 console.log('X wins!');
                 return true;
+            } 
+
+            else if(parent.children[a].innerHTML =='O' && parent.children[b].innerHTML == 'O' && parent.children[c].innerHTML == 'O'){
+                console.log('O wins!');
+                return true;
             }
-      }
-
+        }
+            
         return false;
-    });
-      };
-
+    };
+      
+    
       
     /* if(parent.children[0].innerHTML =='X' && parent.children[1].innerHTML == 'X' && parent.children[2].innerHTML == 'X') {
         alert('X Wins');
